@@ -7,6 +7,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.security.NoSuchAlgorithmException;
+
 @RestControllerAdvice
 public class TratadorDeErros {
 
@@ -19,6 +21,10 @@ public class TratadorDeErros {
     public ResponseEntity tratarErro400(MethodArgumentNotValidException ex) {
         var erros = ex.getFieldErrors();
         return ResponseEntity.badRequest().body(erros.stream().map(DadosErroValidacao::new).toList());
+    }
+    @ExceptionHandler(NoSuchAlgorithmException.class)
+    public ResponseEntity tratarErro400(NoSuchAlgorithmException ex) {
+        return ResponseEntity.badRequest().build();
     }
 
     private record DadosErroValidacao(String campo, String mensagem) {

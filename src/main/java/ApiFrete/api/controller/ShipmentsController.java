@@ -42,7 +42,6 @@ public class ShipmentsController {
             var uri = uriBuilder.path("/shipments/{id}").buildAndExpand(shipment.getId()).toUri();
             return ResponseEntity.created(uri).body(new DataDetailingShipment(shipment));
         } catch (Exception e) {
-            System.out.println(e);
             return ResponseEntity.internalServerError().build();
         }
     }
