@@ -43,6 +43,8 @@ spring.mail.username=<EMAIL DE DISPARO>
 spring.mail.password=<PASSORWD FORNECIDA PELO SERVIÇO DE EMAIL>
 spring.mail.properties.mail.smtp.auth=true
 spring.mail.properties.mail.smtp.starttls.enable=true
+
+api.service.email.secret=<EMAIL DE DISPARO>
 ```
 Com essas variáveis de ambiente configuradas podemos executar nossa aplicação.
 
