@@ -17,8 +17,8 @@ public class PriceCalculator {
 //    public PriceCalculator(DataRegisterShipment data) {
 //        this.dataRegisterShipment = data;
 //    }
-    public int calculatorPrice(GoogleService value, DataRegisterShipment data) throws IOException {
-        var distance = value.getDistance(data);// value.getDistance(this.dataRegisterShipment)
+    public int calculatorPrice(GoogleService value, DataRegisterShipment data, @Value("${api.service.google.key.secret}") String googleKey) throws IOException {
+        var distance = value.getDistance(data, googleKey);// value.getDistance(this.dataRegisterShipment)
         if (distance < 2500 ){
             return 150;
         }
