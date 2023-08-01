@@ -25,6 +25,7 @@ public class Shipment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long user_id;
+    private String client_email;
     private Long weight;
 
     @Embedded
@@ -33,15 +34,24 @@ public class Shipment {
     private Long zip_code_origin;
     private Long zip_code_destination;
     private Integer price;
+    @Enumerated(EnumType.STRING)
+    private ShipmentStatus shipment_status;
 
     public Shipment(DataRegisterShipment data, User logged, Integer price) {
         this.user_id = logged.getId();
+        this.client_email = data.client_email();
         this.weight = data.weight();
         this.address = new Address(data.address());
         this.zip_code_origin = data.zip_code_origin();
         this.zip_code_destination = data.zip_code_destination();
         this.price = price;
+        this.shipment_status = ShipmentStatus.SENT;
     }
 
 
+    public void updatedStatus(DataUpdatedShipment data) {
+        if(data.shipment_status() != null) {
+            this.shipment_status = data.shipment_status();
+        }
+    }
 }
