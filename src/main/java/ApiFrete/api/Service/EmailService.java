@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EmailService {
+    @Value("${api.service.email.secret}")
+    private String email;
 
     @Autowired
     private JavaMailSender emailSender;
@@ -19,7 +21,7 @@ public class EmailService {
     public void sendEmail(String client_email, Long id, ShipmentStatus status) {
         try {
             SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom("ernandesventura@gmail.com");
+            message.setFrom(email);
             message.setTo(client_email);
             message.setSubject("Atualização do Seu pedido de id:" + id);
             switch (status) {
