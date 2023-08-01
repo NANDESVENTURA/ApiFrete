@@ -33,11 +33,11 @@ public class ShipmentsController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity register(@RequestBody @Valid DataRegisterShipment data, UriComponentsBuilder uriBuilder, @AuthenticationPrincipal User logged) throws NoSuchAlgorithmException {
+    public ResponseEntity register(@RequestBody @Valid DataRegisterShipment data, UriComponentsBuilder uriBuilder, @AuthenticationPrincipal User logged, Value("${api.service.google.key.secret}") String googleKey) throws NoSuchAlgorithmException {
         try {
             var googleApi = new GoogleService();
             var priceCalculator = new PriceCalculator(); //new PriceCalculator(data);
-            var price = priceCalculator.calculatorPrice(googleApi, data); //priceCalculator.calculatorPrice(googleApi)
+            var price = priceCalculator.calculatorPrice(googleApi, data, googleKey); //priceCalculator.calculatorPrice(googleApi)
             var shipment = new Shipment(data, logged, price);
             repository.save(shipment);
             var uri = uriBuilder.path("/shipments/{id}").buildAndExpand(shipment.getId()).toUri();
