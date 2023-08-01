@@ -61,7 +61,7 @@ as micrations são criadas automaticamente.
 - ```//shipments POST```: Cadastra um pedido no banco de dados, passando os campos
 "user_id","client_email","weight", um objeto "address" contendo "public_place","neighborhood","complement","number","state e "city".Também os campos "zip_code_origin" e "zip_code_destination".
 - ```//shipments/:id GET``` : Retorna o pedido de acordo com o id passado pela rota.
-- ```//shipments PUT``` : Altera o status do pedido, passando os campos "id" e "shipment_status" que so aceita "SENT,IN_TRANSIT" e "DELIVERED".
+- ```//shipments PUT``` : Altera o status do pedido, passando os campos "id" e "shipment_status" que so aceita "SENT","IN_TRANSIT" e "DELIVERED".
 
 
 
